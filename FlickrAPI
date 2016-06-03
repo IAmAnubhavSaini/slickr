@@ -1,0 +1,9 @@
+API_KEY=84bf9b29bce8db001d1e58dbec8a5770
+FORMAT=one of "rest, json"
+
+https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=84bf9b29bce8db001d1e58dbec8a5770&per_page=1000&page=1&format=json
+
+
+Get 1000 recent photographs from flickr
+ https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=YOUR_API_KEY&per_page=1000&page=1&format=FORMAT
+

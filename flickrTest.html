@@ -1,0 +1,28 @@
+
+<script>
+function makePhotoUrl(photo){
+  return "http://farm" + photo.farm + ".static.flickr.com/" + 
+        photo.server + "/" + photo.id + "_" + photo.secret + "_" + "t.jpg";
+}
+function makeLinkUrl(photo){
+  return "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
+}
+function jsonFlickrApi(res){
+  console.log('called with:', res);
+  window.res = res;
+    var s = "";
+    // http://farm{id}.static.flickr.com/{server-id}/{id}_{secret}_[mstb].jpg
+    // http://www.flickr.com/photos/{user-id}/{photo-id}
+    s = "total number is: " + res.photos.photo.length + "<br/>";
+    
+    for (var i=0; i < res.photos.photo.length; i++) {
+      photo = res.photos.photo[i];
+      t_url = makePhotoUrl(photo);
+      p_url = makeLinkUrl(photo);
+      s +=  '<a href="' + p_url + '">' + '<img alt="'+ photo.title + 
+        '"src="' + t_url + '"/>' + '</a>';
+    }
+    document.writeln(s);
+}
+</script>
+<script src="https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=84bf9b29bce8db001d1e58dbec8a5770&per_page=10&page=1&format=json"></script>
