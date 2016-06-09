@@ -12,6 +12,9 @@
     </style>
 </head>
 <body>
+    <div id="control-panel">
+        <button id="reloadBtn" value="reload">reload</button>
+    </div>
     <div id="slick-images"></div>
     <div id="scripts">
         <script>
@@ -19,18 +22,29 @@
                 height: 120,
                 containerId: 'slick-images'
             };
+            function log(functionName, paramList) {
+                var paramString = paramList.map(function (item){
+                    if(typeof item === typeof ''){
+                        return item;
+                    } else {
+                        return JSON.stringify(item);
+                    }
+                }).join(' ');
+                console.log(functionName, 'called with', paramString);
+            }
             function addSlickImage(slickImage) {
+                log('addSlickImage', [ 'slickImage', slickImage ]);
                 var container = document.getElementById(imageProperties.containerId);
                 container.appendChild(slickImage);
             }
             function createAnchor(url) {
-                console.log('createAnchor', 'called with', url);
+                log('createAnchor', [ 'url', url ]);
                 var anchor = document.createElement('a');
                 anchor.href = url;
                 return anchor;
             }
             function createImage(url, title) {
-                console.log('createImage', 'called with', url, 'and', title);
+                log('createImage', [ 'url', url, 'title', title ]);
                 var image = document.createElement('img');
                 image.src = url;
                 image.title = title;
@@ -38,21 +52,21 @@
                 return image;
             }
             function addImageToAnchor(image, anchor) {
-                console.log('addImageToContainer', 'called with', image, 'and', anchor);
+                log('addImageToAnchor', [ 'image', image, 'anchor', anchor ]);
                 anchor.appendChild(image);
             }
             function makePhotoUrl(photo){
-                console.log('makePhotoUrl', 'called with', photo);
+                log('makePhotoUrl',[ 'photo', photo ]);
                 return "http://farm" + photo.farm + ".static.flickr.com/" +
                     photo.server + "/" + photo.id + "_" + photo.secret + "_" + "t.jpg";
             }
             function makeLinkUrl(photo){
+                log('makeLinkUrl',[ 'photo', photo ]);
                 return "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
             }
             function jsonFlickrApi(res){
-                console.log('called with:', res);
+                log('jsonFlickrApi', [ 'res', res ]);
                 window.res = res;
-                var s = "total number is: " + res.photos.photo.length + "<br/>";
 
                 for (var i = 0, len = res.photos.photo.length; i < len; i++) {
                     photo = res.photos.photo[i];
