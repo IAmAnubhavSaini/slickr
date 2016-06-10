@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="control-panel">
-        <button id="reloadBtn" value="reload">reload</button>
+        <!-- <button id="reloadBtn" value="reload">reload</button> -->
     </div>
     <div id="slick-images"></div>
     <div id="scripts">
@@ -22,18 +22,21 @@
                 height: 120,
                 containerId: 'slick-images'
             };
+            window.EXEC_ENV = 'DEV';
             function log(functionName, paramList) {
-                var paramString = paramList.map(function (item){
-                    if(typeof item === typeof ''){
-                        return item;
-                    } else {
-                        return JSON.stringify(item);
-                    }
-                }).join(' ');
-                console.log(functionName, 'called with', paramString);
+                if(window.EXEC_ENV === 'DEV'){
+                    var paramString = paramList.map(function (item){
+                        if(typeof item === typeof ''){
+                            return item;
+                        } else {
+                            return JSON.stringify(item);
+                        }
+                    }).join(' ');
+                    console.log(functionName, 'called with', paramString);
+                }
             }
-            function addSlickImage(slickImage) {
-                log('addSlickImage', [ 'slickImage', slickImage ]);
+            function appendImageToContainer(slickImage) {
+                log('appendImageToContainer', [ 'slickImage', slickImage ]);
                 var container = document.getElementById(imageProperties.containerId);
                 container.appendChild(slickImage);
             }
@@ -51,9 +54,10 @@
                 image.height = imageProperties.height;
                 return image;
             }
-            function addImageToAnchor(image, anchor) {
-                log('addImageToAnchor', [ 'image', image, 'anchor', anchor ]);
+            function appendImageToAnchor(image, anchor) {
+                log('appendImageToAnchor', [ 'image', image, 'anchor', anchor ]);
                 anchor.appendChild(image);
+                return anchor;
             }
             function makePhotoUrl(photo){
                 log('makePhotoUrl',[ 'photo', photo ]);
@@ -66,17 +70,18 @@
             }
             function jsonFlickrApi(res){
                 log('jsonFlickrApi', [ 'res', res ]);
-                window.res = res;
-
+                var photos = [];
                 for (var i = 0, len = res.photos.photo.length; i < len; i++) {
                     photo = res.photos.photo[i];
-                    t_url = makePhotoUrl(photo);
-                    p_url = makeLinkUrl(photo);
-                    var anchor = createAnchor(p_url);
-                    var image = createImage(t_url);
-                    addImageToAnchor(image, anchor);
-                    addSlickImage(anchor);
+                    photoSrcUrl = makePhotoUrl(photo);
+                    anchorHrefUrl = makeLinkUrl(photo);
+                    var anchor = createAnchor(anchorHrefUrl);
+                    var image = createImage(photoSrcUrl);
+                    var anchoredImage = appendImageToAnchor(image, anchor);
+                    appendImageToContainer(anchoredImage);
+                    photos.push(anchoredImage);
                 }
+                return photos;
             }
         </script>
         <script src="https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=84bf9b29bce8db001d1e58dbec8a5770&per_page=10&page=1&format=json"></script>
