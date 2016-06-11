@@ -3,7 +3,7 @@ module.exports = grunt => {
 
     grunt.initConfig({
         eslint: {
-    		target: ['src/*.js']
+            target: ['Gruntfile.js', 'src/Slickr.js']
     	}
     });
     grunt.registerTask('default', []);
