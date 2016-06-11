@@ -28,12 +28,17 @@ function createAnchor(photo) {
     anchor.href = makeLinkUrl(photo);
     return anchor;
 }
-function createImage(photo, title) {
-    log('createImage', [ 'photo', photo, 'title', title ]);
+function makePhotoUrl(photo){
+    log('makePhotoUrl',[ 'photo', photo ]);
+    return "http://farm" + photo.farm + ".static.flickr.com/" +
+    photo.server + "/" + photo.id + "_" + photo.secret + "_" + "t.jpg";
+}
+function createImage(photo) {
+    log('createImage', [ 'photo', photo ]);
     var image = document.createElement('img');
     image.src = makePhotoUrl(photo);
-    image.title = title;
-    image.alt = title;
+    image.title = photo.title;
+    image.alt = photo.title;
     image.height = imageProperties.height;
     return image;
 }
@@ -41,11 +46,6 @@ function appendImageToAnchor(image, anchor) {
     log('appendImageToAnchor', [ 'image', image, 'anchor', anchor ]);
     anchor.appendChild(image);
     return anchor;
-}
-function makePhotoUrl(photo){
-    log('makePhotoUrl',[ 'photo', photo ]);
-    return "http://farm" + photo.farm + ".static.flickr.com/" +
-        photo.server + "/" + photo.id + "_" + photo.secret + "_" + "t.jpg";
 }
 function makeLinkUrl(photo){
     log('makeLinkUrl',[ 'photo', photo ]);
@@ -67,3 +67,34 @@ function jsonFlickrApi(res){
     log('jsonFlickrApi', [ 'res', res ]);
     onResponseFromFlickrApi(res);
 }
+function createFlickrUrl(options) {
+    log('createFlickrUrl', [
+        'options', options
+    ]);
+    var m = options.method;
+    var key = options.apiKey;
+    var fmt = options.format;
+    var pc = options.pageCount || '1';
+    var ipp = options.imagesPerPage || '10';
+
+    return [
+        'https://api.flickr.com/services/rest/?method=', m,
+        '&api_key=', key,
+        '&per_page=', ipp,
+        '&page=', pc,
+        '&format=', fmt
+    ].join('');
+}
+
+(function intializeSlickr(){
+    var script = document.createElement('script');
+    var options = {
+        method: 'flickr.photos.getRecent',
+        apiKey: '84bf9b29bce8db001d1e58dbec8a5770',
+        format: 'json',
+        pageCount: '1',
+        imagesPerPage: '25'
+    };
+    script.src = createFlickrUrl(options);
+    document.getElementById('scripts').appendChild(script);
+})();
