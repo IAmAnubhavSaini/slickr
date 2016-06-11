@@ -46,6 +46,8 @@ body {
     position: relative;
     margin: 10px;
     width: 200px;
+    height: 300px;
+    overflow: hidden;
 }
 #slick-images div.image::after {
     content: counter(slickrImages);
@@ -65,7 +67,8 @@ body {
 #slick-images div.image a img {
     border: thin solid rgba(48, 48, 48, 0.3);
     box-shadow: 2px 2px 1px #333;
-    max-width: 200px;
+    width: 200px;
+    height: 200px;
 }
 
 .image-title {
