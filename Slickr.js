@@ -11,7 +11,7 @@ Slickr.EXEC_ENV = 'DEV';
 Slickr.log = function (functionName, paramList) {
     if(Slickr.EXEC_ENV === 'DEV'){
         var paramString = paramList.map(function (item){
-            if(typeof item === typeof ''){
+            if(typeof item === typeof 'string'){
                 return item;
             } else {
                 return JSON.stringify(item);
@@ -21,10 +21,22 @@ Slickr.log = function (functionName, paramList) {
     }
 };
 
-Slickr.appendImageToContainer = function (slickImage) {
-    Slickr.log('appendImageToContainer', [ 'slickImage', slickImage ]);
+Slickr.appendImageToContainer = function (photo) {
+    Slickr.log('appendImageToContainer', [ 'photo', photo ]);
+    var img = Slickr.createImage(photo);
+    var a = Slickr.createAnchor(photo);
+    var title = photo.title;
+    var anchoredImage = Slickr.appendImageToAnchor(img, a);
     var container = document.getElementById(Slickr.imageProperties.containerId);
-    container.appendChild(slickImage);
+    var imageContainer = document.createElement('div');
+    imageContainer.className += 'image';
+    imageContainer.appendChild(anchoredImage);
+    var imageTitle = document.createElement('div');
+    imageTitle.className += 'image-title';
+    imageTitle.innerText = title;
+    imageContainer.appendChild(imageTitle);
+    container.appendChild(imageContainer);
+    return imageContainer;
 };
 
 Slickr.createAnchor = function (photo) {
@@ -64,12 +76,10 @@ Slickr.makeLinkUrl = function (photo){
 Slickr.onResponseFromFlickrApi = function (res){
     Slickr.log('onResponseFromFlickrApi', [ 'res', res ]);
     var photos = [];
-    var photo, anchoredImage;
+    var photo;
     for (var i = 0, len = res.photos.photo.length; i < len; i++) {
         photo = res.photos.photo[i];
-        anchoredImage = Slickr.appendImageToAnchor(Slickr.createImage(photo), Slickr.createAnchor(photo));
-        Slickr.appendImageToContainer(anchoredImage);
-        photos.push(anchoredImage);
+        photos.push(Slickr.appendImageToContainer(photo));
     }
     return photos;
 };
@@ -105,7 +115,7 @@ Slickr.createFlickrUrl = function (options) {
         apiKey: '84bf9b29bce8db001d1e58dbec8a5770',
         format: 'json',
         pageCount: '1',
-        imagesPerPage: '10'
+        imagesPerPage: '20'
     };
     script.src = Slickr.createFlickrUrl(options);
     document.getElementById('scripts').appendChild(script);

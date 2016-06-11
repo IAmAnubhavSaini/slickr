@@ -41,12 +41,16 @@ body {
     flex-wrap: wrap;
     counter-reset: slickrImages;
 }
-#slick-images a {
+#slick-images div.image {
     counter-increment: slickrImages;
-    text-decoration: none;
     position: relative;
+    margin: 10px;
+    max-width: 200px;
 }
-#slick-images a::after {
+#slick-images div.image a {
+    text-decoration: none;
+}
+#slick-images div.image::after {
     content: counter(slickrImages);
     position: absolute;
     top: 15px;
@@ -58,11 +62,19 @@ body {
     text-shadow: 0 0 1px #000;
     background-color: rgba(0, 0, 0, 0.2);
 }
-#slick-images a img {
+#slick-images div.image a img {
     margin: 15px;
     padding: 15px;
     border: thin solid rgba(48, 48, 48, 0.3);
     box-shadow: 2px 2px 1px #333;
+    max-width: 90%;
+}
+
+.image-title {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 899px) {
