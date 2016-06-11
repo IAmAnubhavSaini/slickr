@@ -22,17 +22,18 @@ function appendImageToContainer(slickImage) {
     var container = document.getElementById(imageProperties.containerId);
     container.appendChild(slickImage);
 }
-function createAnchor(url) {
-    log('createAnchor', [ 'url', url ]);
+function createAnchor(photo) {
+    log('createAnchor', [ 'photo', photo ]);
     var anchor = document.createElement('a');
-    anchor.href = url;
+    anchor.href = makeLinkUrl(photo);
     return anchor;
 }
-function createImage(url, title) {
-    log('createImage', [ 'url', url, 'title', title ]);
+function createImage(photo, title) {
+    log('createImage', [ 'photo', photo, 'title', title ]);
     var image = document.createElement('img');
-    image.src = url;
+    image.src = makePhotoUrl(photo);
     image.title = title;
+    image.alt = title;
     image.height = imageProperties.height;
     return image;
 }
@@ -53,14 +54,10 @@ function makeLinkUrl(photo){
 function onResponseFromFlickrApi(res){
     log('onResponseFromFlickrApi', [ 'res', res ]);
     var photos = [];
-    var photo, photoSrcUrl, anchorHrefUrl, anchor, image, anchoredImage;
+    var photo, anchoredImage;
     for (var i = 0, len = res.photos.photo.length; i < len; i++) {
         photo = res.photos.photo[i];
-        photoSrcUrl = makePhotoUrl(photo);
-        anchorHrefUrl = makeLinkUrl(photo);
-        anchor = createAnchor(anchorHrefUrl);
-        image = createImage(photoSrcUrl);
-        anchoredImage = appendImageToAnchor(image, anchor);
+        anchoredImage = appendImageToAnchor(createImage(photo), createAnchor(photo));
         appendImageToContainer(anchoredImage);
         photos.push(anchoredImage);
     }
