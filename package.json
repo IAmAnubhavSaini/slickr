@@ -1,0 +1,23 @@
+{
+  "name": "slicker-flicker",
+  "version": "1.0.0",
+  "description": "A Flikr API implementation.",
+  "main": "Slickr.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IAmAnubhavSaini/slickr.git"
+  },
+  "author": "Anubhav Saini <IAmAnubhavSaini@GMail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IAmAnubhavSaini/slickr/issues"
+  },
+  "homepage": "https://github.com/IAmAnubhavSaini/slickr#readme",
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "grunt": "^1.0.1"
+  }
+}

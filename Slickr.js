@@ -120,3 +120,5 @@ Slickr.createFlickrUrl = function (options) {
     script.src = Slickr.createFlickrUrl(options);
     document.getElementById('scripts').appendChild(script);
 })();
+
+module.exports = Slickr;
