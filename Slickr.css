@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+#control-panel, #slick-images {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+#control-panel {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+#control-panel #site-title {
+    font-size: 32px;
+    text-shadow: 1px 2px 1px #999;
+    border-bottom: thin solid #999;
+    padding: 10px;
+    margin: 10px;
+}
+#control-panel button#reloadBtn {
+    display: none;
+    height: 40px;
+    width: 40px;
+    margin: 20px;
+    font-size: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgba(48, 48, 48, 0.3);
+    border: thin solid #999;
+}
+#control-panel button#reloadBtn:hover {
+    background-color: #333;
+    color: #DDD;
+}
+#control-panel button#reloadBtn:active {
+    box-shadow:0 0 3px #000;
+}
+#slick-images {
+    flex-wrap: wrap;
+}
+#slick-images a img {
+    margin: 15px;
+    padding: 15px;
+    border: thin solid rgba(48, 48, 48, 0.3);
+    box-shadow: 2px 2px 1px #333;
+}
