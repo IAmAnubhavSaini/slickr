@@ -8,19 +8,15 @@
             margin: 0;
             padding: 0;
         }
-        img {
-            margin: 15px;
-            padding: 15px;
-            border: thin solid rgba(48, 48, 48, 0.3);
-            box-shadow: 2px 2px 1px #333;
-        }
-        #control-panel {
+        #control-panel, #slick-images {
             width: 80%;
             margin: auto;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
+        }
+        #control-panel {
+            padding-bottom: 10px;
+            margin-bottom: 10px;
         }
         #control-panel #site-title {
             font-size: 32px;
@@ -48,11 +44,13 @@
             box-shadow:0 0 3px #000;
         }
         #slick-images {
-            width: 80%;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
             flex-wrap: wrap;
+        }
+        #slick-images a img {
+            margin: 15px;
+            padding: 15px;
+            border: thin solid rgba(48, 48, 48, 0.3);
+            box-shadow: 2px 2px 1px #333;
         }
     </style>
 </head>
