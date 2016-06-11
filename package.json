@@ -2,7 +2,7 @@
   "name": "slicker-flicker",
   "version": "1.0.0",
   "description": "A Flikr API implementation.",
-  "main": "Slickr.js",
+  "main": "index.js",
   "scripts": {
     "test": "grunt test"
   },

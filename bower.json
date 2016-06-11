@@ -1,7 +1,7 @@
 {
   "name": "slicker-flicker",
   "description": "A Flikr API implementation.",
-  "main": "Slickr.js",
+  "main": "index.js",
   "authors": [
     "Anubhav Saini <IAmAnubhavSaini@GMail.com>"
   ],
