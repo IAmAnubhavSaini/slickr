@@ -4,17 +4,62 @@
     <meta charset="utf-8">
     <title>Slickr: A Flickr API implementation.</title>
     <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
         img {
             margin: 15px;
             padding: 15px;
             border: thin solid rgba(48, 48, 48, 0.3);
             box-shadow: 2px 2px 1px #333;
         }
+        #control-panel {
+            width: 80%;
+            margin: auto;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #control-panel #site-title {
+            font-size: 32px;
+            text-shadow: 1px 2px 1px #999;
+            border-bottom: thin solid #999;
+            padding: 10px;
+            margin: 10px;
+        }
+        #control-panel button#reloadBtn {
+            display: none;
+            height: 40px;
+            width: 40px;
+            margin: 20px;
+            font-size: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: rgba(48, 48, 48, 0.3);
+            border: thin solid #999;
+        }
+        #control-panel button#reloadBtn:hover {
+            background-color: #333;
+            color: #DDD;
+        }
+        #control-panel button#reloadBtn:active {
+            box-shadow:0 0 3px #000;
+        }
+        #slick-images {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 <body>
     <div id="control-panel">
-        <!-- <button id="reloadBtn" value="reload">reload</button> -->
+        <span id="site-title">Slikr</span>
+        <button id="reloadBtn" value="reload">reload</button>
     </div>
     <div id="slick-images"></div>
     <div id="scripts">
@@ -69,8 +114,8 @@
                 log('makeLinkUrl',[ 'photo', photo ]);
                 return "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
             }
-            function jsonFlickrApi(res){
-                log('jsonFlickrApi', [ 'res', res ]);
+            function onResponseFromFlickrApi(res){
+                log('onResponseFromFlickrApi', [ 'res', res ]);
                 var photos = [];
                 for (var i = 0, len = res.photos.photo.length; i < len; i++) {
                     photo = res.photos.photo[i];
@@ -83,6 +128,10 @@
                     photos.push(anchoredImage);
                 }
                 return photos;
+            }
+            function jsonFlickrApi(res){
+                log('jsonFlickrApi', [ 'res', res ]);
+                onResponseFromFlickrApi(res);
             }
         </script>
         <script src="https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=84bf9b29bce8db001d1e58dbec8a5770&per_page=10&page=1&format=json"></script>
