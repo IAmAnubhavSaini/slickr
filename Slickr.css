@@ -1,0 +1,124 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#control-panel,
+#slick-images {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+#control-panel {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+#control-panel #site-title {
+  font-size: 32px;
+  text-shadow: 1px 2px 1px #999;
+  border-bottom: thin solid #999;
+  padding: 10px;
+  margin: 10px;
+}
+
+#control-panel button#reloadBtn {
+  display: none;
+  height: 40px;
+  width: 40px;
+  margin: 20px;
+  font-size: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgba(48, 48, 48, 0.3);
+  border: thin solid #999;
+}
+
+#control-panel button#reloadBtn:hover {
+  background-color: #333;
+  color: #DDD;
+}
+
+#control-panel button#reloadBtn:active {
+  box-shadow: 0 0 3px #000;
+}
+
+#slick-images {
+  flex-wrap: wrap;
+  counter-reset: slickrImages;
+}
+
+#slick-images div.image {
+  counter-increment: slickrImages;
+  position: relative;
+  margin: 10px;
+  width: 200px;
+  height: 300px;
+  overflow: hidden;
+}
+
+#slick-images div.image::after {
+  content: counter(slickrImages);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 4px;
+  font-size: 8px;
+  font-weight: bold;
+  color: #FFF;
+  text-shadow: 0 0 1px #000;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#slick-images div.image a {
+  text-decoration: none;
+}
+
+#slick-images div.image a img {
+  border: thin solid rgba(48, 48, 48, 0.3);
+  box-shadow: 2px 2px 1px #333;
+  width: 200px;
+  height: 200px;
+}
+
+.image-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+  max-width: 200px;
+}
+
+@media screen and (max-width: 899px) {
+  body{
+      padding-bottom: 100px;
+  }
+
+  #control-panel {
+      position: fixed;
+      bottom: 0;
+      padding: 0;
+      margin:0;
+      background-color: #333;
+      color: #EEE;
+      width: 100%;
+      z-index: 100;
+  }
+
+  #control-panel button#reloadBtn {
+      color: #FFF;
+      background-color: #333;
+      border: thin solid #999;
+  }
+
+  #control-panel button#reloadBtn:active {
+      box-shadow:0 0 3px #000;
+  }
+
+  #slick-images {
+      width: 90%;
+      justify-content: center;
+  }
+}
