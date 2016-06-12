@@ -25,6 +25,7 @@ body {
 }
 
 #control-panel button#reloadBtn {
+  display: none;
   height: 40px;
   width: 40px;
   margin: 20px;
