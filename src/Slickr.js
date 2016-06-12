@@ -86,12 +86,18 @@ Slickr.onResponseFromFlickrApi = function(res) {
   }
   return photos;
 };
-
+/* eslint-disable no-unused-vars */
+/**
+ * Flickr API callbacks this function by default.
+ * @param {object} res - object containing data.
+ * @return {object} res - same object that it receives for verifiability.
+ */
 function jsonFlickrApi(res) {
   Slickr.log('jsonFlickrApi', ['res', res]);
   Slickr.onResponseFromFlickrApi(res);
+  return res;
 }
-
+/* eslint-enable no-unused-vars */
 Slickr.createFlickrUrl = function(options) {
   Slickr.log('createFlickrUrl', [
     'options', options
