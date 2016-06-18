@@ -5,3 +5,7 @@ bower_components/
 *.~
 build/
 builds/
+.sass-cache/
+Dist/
+src/
+
