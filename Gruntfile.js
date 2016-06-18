@@ -3,7 +3,12 @@ module.exports = grunt => {
 
   grunt.initConfig({
     eslint: {
-      target: ['Gruntfile.js', 'App/scripts/app.js']
+      target: [
+        'Gruntfile.js',
+        'App/scripts/app.js',
+        'App/scripts/app.env.js',
+        'App/scripts/app.utils.js'
+      ]
     },
 
     pkg: grunt.file.readJSON('package.json'),
