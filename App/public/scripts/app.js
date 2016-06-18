@@ -2,24 +2,36 @@
 
 var Slickr = {};
 
+Slickr.env = {
+  current: 'DEV',
+  isCurrentEnv: function(expected) {
+    return Slickr.env.current === expected;
+  },
+  setToProd: function() {
+    Slickr.env.current = 'PROD';
+  },
+  setToDev: function() {
+    Slickr.env.current = 'DEV';
+  }
+};
+Slickr.utils = {
+  log: function(functionName, paramList) {
+    if (Slickr.env.isCurrentEnv('DEV')) {
+      var paramString = paramList.map(function(item) {
+        return typeof item === typeof 'string' ? item : JSON.stringify(item);
+      }).join(' ');
+      console.log(functionName, 'called with', paramString);
+    }
+  }
+};
+
 Slickr.imageProperties = {
   height: 120,
   containerId: 'slick-images'
 };
 
-Slickr.EXEC_ENV = 'DEV';
-
-Slickr.log = function(functionName, paramList) {
-  if (Slickr.EXEC_ENV === 'DEV') {
-    var paramString = paramList.map(function(item) {
-      return typeof item === typeof 'string' ? item : JSON.stringify(item);
-    }).join(' ');
-    console.log(functionName, 'called with', paramString);
-  }
-};
-
 Slickr.appendImageToContainer = function(photo) {
-  Slickr.log('appendImageToContainer', ['photo', photo]);
+  Slickr.utils.log('appendImageToContainer', ['photo', photo]);
   var img = Slickr.createImage(photo);
   var a = Slickr.createAnchor(photo);
   var title = photo.title;
@@ -39,7 +51,7 @@ Slickr.appendImageToContainer = function(photo) {
 };
 
 Slickr.createAnchor = function(photo) {
-  Slickr.log('createAnchor', ['photo', photo]);
+  Slickr.utils.log('createAnchor', ['photo', photo]);
   /* eslint-disable no-undef */
   var anchor = document.createElement('a');
   /* eslint-enable no-undef */
@@ -48,13 +60,13 @@ Slickr.createAnchor = function(photo) {
 };
 
 Slickr.makePhotoUrl = function(photo) {
-  Slickr.log('makePhotoUrl', ['photo', photo]);
+  Slickr.utils.log('makePhotoUrl', ['photo', photo]);
   return "http://farm" + photo.farm + ".static.flickr.com/" +
-  photo.server + "/" + photo.id + "_" + photo.secret + "_t.jpg";
+    photo.server + "/" + photo.id + "_" + photo.secret + "_t.jpg";
 };
 
 Slickr.createImage = function(photo) {
-  Slickr.log('createImage', ['photo', photo]);
+  Slickr.utils.log('createImage', ['photo', photo]);
   /* eslint-disable no-undef */
   var image = document.createElement('img');
   /* eslint-enable no-undef */
@@ -66,18 +78,18 @@ Slickr.createImage = function(photo) {
 };
 
 Slickr.appendImageToAnchor = function(image, anchor) {
-  Slickr.log('appendImageToAnchor', ['image', image, 'anchor', anchor]);
+  Slickr.utils.log('appendImageToAnchor', ['image', image, 'anchor', anchor]);
   anchor.appendChild(image);
   return anchor;
 };
 
 Slickr.makeLinkUrl = function(photo) {
-  Slickr.log('makeLinkUrl', ['photo', photo]);
+  Slickr.utils.log('makeLinkUrl', ['photo', photo]);
   return "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
 };
 
 Slickr.onResponseFromFlickrApi = function(res) {
-  Slickr.log('onResponseFromFlickrApi', ['res', res]);
+  Slickr.utils.log('onResponseFromFlickrApi', ['res', res]);
   var photos = [];
   var photo;
   for (var i = 0, len = res.photos.photo.length; i < len; i++) {
@@ -93,13 +105,13 @@ Slickr.onResponseFromFlickrApi = function(res) {
  * @return {object} res - same object that it receives for verifiability.
  */
 function jsonFlickrApi(res) {
-  Slickr.log('jsonFlickrApi', ['res', res]);
+  Slickr.utils.log('jsonFlickrApi', ['res', res]);
   Slickr.onResponseFromFlickrApi(res);
   return res;
 }
 /* eslint-enable no-unused-vars */
 Slickr.createFlickrUrl = function(options) {
-  Slickr.log('createFlickrUrl', [
+  Slickr.utils.log('createFlickrUrl', [
     'options', options
   ]);
   var m = options.method;
@@ -118,6 +130,8 @@ Slickr.createFlickrUrl = function(options) {
 };
 
 (function intializeSlickr() {
+  Slickr.env.setToDev();
+  Slickr.utils.log('intializeSlickr');
   /* eslint-disable no-undef */
   var script = document.createElement('script');
   /* eslint-enable no-undef */
