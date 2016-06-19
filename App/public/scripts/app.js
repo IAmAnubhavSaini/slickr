@@ -107,7 +107,7 @@ Slickr.tagCloud = {
     var frequency = {};
     for (var i = 0, len = tokensArray.length; i < len; i++) {
       var tokens = Slickr.utils.split(tokensArray[i]);
-      for (var j = 0; j < tokensArray.length; j++) {
+      for (var j = 0; j < tokens.length; j++) {
         if (frequency[tokens[j]] >= 1) {
           frequency[tokens[j]] += 1;
         } else {
