@@ -19,7 +19,8 @@ body {
   content: 'Tags';
 }
 
-.tags.tag-cloud .tag::after {
+.tags.tag-cloud .tag::after,
+.titles.tag-cloud .title::after {
   content: attr(data-count);
   padding: .2em;
   margin-left: .2em;
@@ -30,10 +31,6 @@ body {
 
 section.images::before {
   content: 'Recent images';
-}
-
-.tag-cloud::before {
-  content: 'Tag cloud of ';
 }
 
 .tag-cloud::before,

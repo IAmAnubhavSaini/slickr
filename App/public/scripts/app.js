@@ -102,14 +102,31 @@ Slickr.appendImages = function(photos) {
 };
 
 Slickr.titles = {
-  appendTitles: function(titles) {
-    Slickr.utils.log('appendTitles', ['titles', titles]);
-    var titlesContainer = $('section.titles.tag-cloud');
+  splittedTitles: function(titles) {
+    Slickr.utils.log('splittedTitles', ['titles', titles]);
+    var splittedTitles = {};
     for (var i = 0, len = titles.length; i < len; i++) {
       var title = Slickr.utils.split(titles[i]);
       for (var j = 0; title[j]; j++) {
+        if (splittedTitles[title[j]]) {
+          splittedTitles[title[j]] += 1;
+        } else {
+          splittedTitles[title[j]] = 1;
+        }
+      }
+    }
+    return splittedTitles;
+  },
+  appendTitles: function(titles) {
+    Slickr.utils.log('appendTitles', ['titles', titles]);
+    var titlesContainer = $('section.titles.tag-cloud');
+    var titleCloudData = Slickr.titles.splittedTitles(titles);
+    for (var title in titleCloudData) {
+      if (titleCloudData.hasOwnProperty(title)) {
         var element = $('<span class="title"></span>');
-        element.text(title[j]);
+        element
+          .text(title)
+          .attr('data-count', titleCloudData[title]);
         titlesContainer.append(element);
       }
     }
