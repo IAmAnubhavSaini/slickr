@@ -117,14 +117,31 @@ Slickr.titles = {
 };
 
 Slickr.tags = {
-  appendTags: function(tags) {
-    Slickr.utils.log('appendTags', ['tags', tags]);
-    var tagsContainer = $('section.tags.tag-cloud');
+  splittedTags: function(tags) {
+    Slickr.utils.log('splittedTags', ['tags', tags]);
+    var splittedTags = {};
     for (var i = 0, len = tags.length; i < len; i++) {
       var tag = Slickr.utils.split(tags[i]);
       for (var j = 0; tag[j]; j++) {
+        if (splittedTags[tag[j]]) {
+          splittedTags[tag[j]] += 1;
+        } else {
+          splittedTags[tag[j]] = 1;
+        }
+      }
+    }
+    return splittedTags;
+  },
+  appendTags: function(tags) {
+    Slickr.utils.log('appendTags', ['tags', tags]);
+    var tagsContainer = $('section.tags.tag-cloud');
+    var tagCloudData = Slickr.tags.splittedTags(tags);
+    for (var tag in tagCloudData) {
+      if (tagCloudData.hasOwnProperty(tag)) {
         var element = $('<span class="tag"></span>');
-        element.text(tag[j]);
+        element
+          .text(tag)
+          .attr('data-count', tagCloudData[tag]);
         tagsContainer.append(element);
       }
     }
@@ -193,7 +210,7 @@ Slickr.createFlickrUrl = function(options) {
     apiKey: '84bf9b29bce8db001d1e58dbec8a5770',
     format: 'json',
     pageCount: '1',
-    imagesPerPage: '10'
+    imagesPerPage: '100'
   };
   script.src = Slickr.createFlickrUrl(options);
   /* eslint-disable no-undef */

@@ -19,8 +19,21 @@ body {
   content: 'Tags';
 }
 
+.tags.tag-cloud .tag::after {
+  content: attr(data-count);
+  padding: .2em;
+  margin-left: .2em;
+  margin-right: -.2em;
+  background-color: $yellow;
+  color: $black;
+};
+
 section.images::before {
   content: 'Recent images';
+}
+
+.tag-cloud::before {
+  content: 'Tag cloud of ';
 }
 
 .tag-cloud::before,
