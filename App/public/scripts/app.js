@@ -9,13 +9,15 @@ Slickr.createElements = function() {
   var imageTitle = document.createElement('div');
   var imageElement = document.createElement('img');
   var anchorElement = document.createElement('a');
+  var ownerName = document.createElement('div');
   /* eslint-enable no-undef */
 
   return {
     imageContainer: imageContainer,
     imageTitle: imageTitle,
     imageElement: imageElement,
-    anchorElement: anchorElement
+    anchorElement: anchorElement,
+    ownerName: ownerName
   };
 };
 
@@ -48,17 +50,26 @@ Slickr.getContainer = function() {
   return document.getElementById(Slickr.env.imageProperties.containerId);
 };
 
+Slickr.createOwnerName = function(photo, element) {
+  Slickr.utils.log('createOwnerName', ['photo', photo, 'element', element]);
+  element.innerText = photo.ownername;
+  element.className += 'owner-name';
+  return element;
+};
+
 Slickr.appendImageToContainer = function(photo) {
   Slickr.utils.log('appendImageToContainer', ['photo', photo]);
   var createdElements = Slickr.createElements();
+  var ownerName = Slickr.createOwnerName(photo, createdElements.ownerName);
   var img = Slickr.createImage(photo, createdElements.imageElement);
   var a = Slickr.createAnchor(photo, createdElements.anchorElement);
   var imageContainerElement = createdElements.imageContainer;
   var title = photo.title;
   var anchoredImage = Slickr.appendImageToAnchor(img, a);
   var imageTitle = Slickr.createImageTitle(title, createdElements.imageTitle);
-  var imageContainer = Slickr.createImageContainer(imageContainerElement); 
+  var imageContainer = Slickr.createImageContainer(imageContainerElement);
   imageContainer.appendChild(anchoredImage);
+  imageContainer.appendChild(ownerName);
   imageContainer.appendChild(imageTitle);
   Slickr.getContainer().appendChild(imageContainer);
   return imageContainer;
@@ -141,8 +152,8 @@ Slickr.createFlickrUrl = function(options) {
     method: 'flickr.photos.getRecent',
     apiKey: '84bf9b29bce8db001d1e58dbec8a5770',
     format: 'json',
-    pageCount: '4',
-    imagesPerPage: '500'
+    pageCount: '1',
+    imagesPerPage: '10'
   };
   script.src = Slickr.createFlickrUrl(options);
   /* eslint-disable no-undef */

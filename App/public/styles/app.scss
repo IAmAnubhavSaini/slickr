@@ -70,6 +70,18 @@ body {
       text-shadow: 0 0 1px $black;
       background-color: rgba(0, 0, 0, 0.2);
     }
+
+    & .owner-name::before {
+      content: 'by ';
+    }
+
+    & .image-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 200px;
+      max-width: 200px;
+    }
   }
 
   & a {
@@ -82,13 +94,7 @@ body {
   }
 }
 
-.image-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 200px;
-  max-width: 200px;
-}
+
 
 @media screen and (max-width: 899px) {
   body{
