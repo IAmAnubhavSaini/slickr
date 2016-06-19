@@ -1,16 +1,38 @@
 @import 'colors';
 
 body {
-  margin: 0;
   padding: 0;
+  width: 80%;
+  margin: auto;
 }
 
 #control-panel,
 #slick-images {
-  width: 80%;
-  margin: auto;
   display: flex;
   justify-content: space-between;
+}
+
+.titles.tag-cloud::before {
+  content: 'Titles: ';
+}
+.tags.tag-cloud::before {
+  content: 'Tags: ';
+}
+
+.tag-cloud::before {
+  display: block;
+  background-color: $yellow;
+  color: $black;
+  padding: 1em;
+  font-size: 1.4em;
+}
+
+.titles.tag-cloud .title {
+  background-color: $black;
+  color: $yellow;
+  padding: .3em;
+  margin: .3em;
+  display: inline-block;
 }
 
 #control-panel {

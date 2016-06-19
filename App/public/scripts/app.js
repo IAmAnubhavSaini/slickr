@@ -94,14 +94,37 @@ Slickr.makeLinkUrl = function(photo) {
   return "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
 };
 
+Slickr.appendImages = function(photos) {
+  Slickr.utils.log('appendImages', ['photos', photos]);
+  for (var i = 0, len = photos.length; i < len; i++) {
+    Slickr.appendImageToContainer(photos[i]);
+  }
+};
+
+Slickr.appendTitles = function(titles) {
+  Slickr.utils.log('appendTitles', ['titles', titles]);
+  var titlesContainer = $('section.titles.tag-cloud');
+  for (var i = 0, len = titles.length; i < len; i++) {
+    var element = $('<span class="title"></span>');
+    element.text(titles[i]);
+    titlesContainer.append(element);
+  }
+};
+
 Slickr.onResponseFromFlickrApi = function(res) {
   Slickr.utils.log('onResponseFromFlickrApi', ['res', res]);
   var photos = [];
+  var titles = [];
+  var tags = [];
   var photo;
   for (var i = 0, len = res.photos.photo.length; i < len; i++) {
     photo = res.photos.photo[i];
-    photos.push(Slickr.appendImageToContainer(photo));
+    photos.push(photo);
+    titles.push(photo.title);
+    tags.push(photo.tags);
   }
+  Slickr.appendImages(photos);
+  Slickr.appendTitles(titles);
   return photos;
 };
 
