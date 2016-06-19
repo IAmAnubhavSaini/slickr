@@ -174,8 +174,8 @@ Slickr.onResponseFromFlickrApi = function(res) {
   for (var i = 0, len = res.photos.photo.length; i < len; i++) {
     photo = res.photos.photo[i];
     photos.push(photo);
-    titles.push(photo.title);
-    tags.push(photo.tags);
+    titles.push(photo.title.toLowerCase());
+    tags.push(photo.tags.toLowerCase());
   }
   Slickr.titles.appendTitles(titles);
   Slickr.tags.appendTags(tags);
