@@ -101,24 +101,36 @@ Slickr.appendImages = function(photos) {
   }
 };
 
-Slickr.appendTitles = function(titles) {
-  Slickr.utils.log('appendTitles', ['titles', titles]);
-  var titlesContainer = $('section.titles.tag-cloud');
-  for (var i = 0, len = titles.length; i < len; i++) {
-    var element = $('<span class="title"></span>');
-    element.text(titles[i]);
-    titlesContainer.append(element);
+Slickr.titles = {
+  appendTitles: function(titles) {
+    Slickr.utils.log('appendTitles', ['titles', titles]);
+    var titlesContainer = $('section.titles.tag-cloud');
+    for (var i = 0, len = titles.length; i < len; i++) {
+      var title = Slickr.utils.split(titles[i]);
+      for (var j = 0; title[j]; j++) {
+        var element = $('<span class="title"></span>');
+        element.text(title[j]);
+        titlesContainer.append(element);
+      }
+    }
   }
 };
-Slickr.appendTags = function(tags) {
-  Slickr.utils.log('appendTags', ['tags', tags]);
-  var tagsContainer = $('section.tags.tag-cloud');
-  for (var i = 0, len = tags.length; i < len; i++) {
-    var element = $('<span class="tag"></span>');
-    element.text(tags[i]);
-    tagsContainer.append(element);
+
+Slickr.tags = {
+  appendTags: function(tags) {
+    Slickr.utils.log('appendTags', ['tags', tags]);
+    var tagsContainer = $('section.tags.tag-cloud');
+    for (var i = 0, len = tags.length; i < len; i++) {
+      var tag = Slickr.utils.split(tags[i]);
+      for (var j = 0; tag[j]; j++) {
+        var element = $('<span class="tag"></span>');
+        element.text(tag[j]);
+        tagsContainer.append(element);
+      }
+    }
   }
 };
+
 Slickr.onResponseFromFlickrApi = function(res) {
   Slickr.utils.log('onResponseFromFlickrApi', ['res', res]);
   var photos = [];
@@ -131,9 +143,9 @@ Slickr.onResponseFromFlickrApi = function(res) {
     titles.push(photo.title);
     tags.push(photo.tags);
   }
+  Slickr.titles.appendTitles(titles);
+  Slickr.tags.appendTags(tags);
   Slickr.appendImages(photos);
-  Slickr.appendTitles(titles);
-  Slickr.appendTags(tags);
   return photos;
 };
 

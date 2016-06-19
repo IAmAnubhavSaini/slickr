@@ -9,5 +9,9 @@ Slickr.utils = {
       }).join(' ');
       console.log(functionName, 'called with', paramString);
     }
+  },
+  split: function(toSplit) {
+    Slickr.utils.log('split', ['toSplit', toSplit]);
+    return toSplit.split(/\W+/g);
   }
 };

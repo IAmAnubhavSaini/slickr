@@ -13,14 +13,14 @@ body {
 }
 
 .titles.tag-cloud::before {
-  content: 'Titles: ';
+  content: 'Titles';
 }
 .tags.tag-cloud::before {
-  content: 'Tags: ';
+  content: 'Tags';
 }
 
 section.images::before {
-  content: 'Recent images: ';
+  content: 'Recent images';
 }
 
 .tag-cloud::before,
