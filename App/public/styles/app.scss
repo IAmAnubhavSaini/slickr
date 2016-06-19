@@ -12,6 +12,14 @@ body {
   justify-content: space-between;
 }
 
+.tag-cloud.display {
+  display: block;
+}
+
+.tag-cloud {
+  display: none;
+}
+
 .titles.tag-cloud::before {
   content: 'Titles';
 }
@@ -68,6 +76,11 @@ section.images::before {
 
   & button#reloadBtn {
     display: none;
+  }
+
+  & button#tagsToggleBtn,
+  & button#titlesToggleBtn,
+  & button#reloadBtn {
     height: 40px;
     width: 40px;
     margin: 20px;

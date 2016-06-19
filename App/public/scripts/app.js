@@ -234,3 +234,12 @@ Slickr.createFlickrUrl = function(options) {
   document.getElementById('scripts').appendChild(script);
   /* eslint-enable no-undef */
 })();
+
+$(function() {
+  $('#titlesToggleBtn').on('click', function() {
+    $('.titles.tag-cloud').toggleClass('display');
+  });
+  $('#tagsToggleBtn').on('click', function() {
+    $('.tags.tag-cloud').toggleClass('display');
+  });
+});
