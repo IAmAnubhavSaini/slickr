@@ -101,20 +101,28 @@ Slickr.appendImages = function(photos) {
   }
 };
 
-Slickr.titles = {
-  splittedTitles: function(titles) {
-    Slickr.utils.log('splittedTitles', ['titles', titles]);
-    var splittedTitles = {};
-    for (var i = 0, len = titles.length; i < len; i++) {
-      var title = Slickr.utils.split(titles[i]);
-      for (var j = 0; title[j]; j++) {
-        if (splittedTitles[title[j]]) {
-          splittedTitles[title[j]] += 1;
+Slickr.tagCloud = {
+  wordFrequency: function(tokensArray) {
+    Slickr.utils.log('wordFrequency', ['tokensArray', tokensArray]);
+    var frequency = {};
+    for (var i = 0, len = tokensArray.length; i < len; i++) {
+      var tokens = Slickr.utils.split(tokensArray[i]);
+      for (var j = 0; j < tokensArray.length; j++) {
+        if (frequency[tokens[j]] >= 1) {
+          frequency[tokens[j]] += 1;
         } else {
-          splittedTitles[title[j]] = 1;
+          frequency[tokens[j]] = 1;
         }
       }
     }
+    return frequency;
+  }
+};
+
+Slickr.titles = {
+  splittedTitles: function(titles) {
+    Slickr.utils.log('splittedTitles', ['titles', titles]);
+    var splittedTitles = Slickr.tagCloud.wordFrequency(titles);
     return splittedTitles;
   },
   appendTitles: function(titles) {
@@ -136,17 +144,7 @@ Slickr.titles = {
 Slickr.tags = {
   splittedTags: function(tags) {
     Slickr.utils.log('splittedTags', ['tags', tags]);
-    var splittedTags = {};
-    for (var i = 0, len = tags.length; i < len; i++) {
-      var tag = Slickr.utils.split(tags[i]);
-      for (var j = 0; tag[j]; j++) {
-        if (splittedTags[tag[j]]) {
-          splittedTags[tag[j]] += 1;
-        } else {
-          splittedTags[tag[j]] = 1;
-        }
-      }
-    }
+    var splittedTags = Slickr.tagCloud.wordFrequency(tags);
     return splittedTags;
   },
   appendTags: function(tags) {
