@@ -57,6 +57,7 @@ body {
     max-width: 200px;
     max-height: 300px;
     overflow: hidden;
+    line-height: 1.4em;
 
     &::after {
       content: counter(slickrImages);
@@ -71,8 +72,30 @@ body {
       background-color: rgba(0, 0, 0, 0.2);
     }
 
+    & .owner-name::before,
+    & .tags::before,
+    & .image-title::before {
+      background-color: $olive;
+      color: $white;
+      padding: .1em .5em;
+      border-radius: .4em;
+      margin: auto .3em;
+    }
+
     & .owner-name::before {
       content: 'by ';
+    }
+    & .owner-name {
+      color: $blue;
+      background-color: $white;
+      border-radius: .4em;
+    }
+    & .tags::before {
+      content: 'tags ';
+    }
+
+    & .image-title::before {
+      content: 'title ';
     }
 
     & .image-title {

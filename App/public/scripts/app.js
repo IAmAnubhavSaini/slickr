@@ -4,56 +4,50 @@
 
 Slickr.createElements = function() {
   Slickr.utils.log('createElements', []);
-  /* eslint-disable no-undef */
-  var imageContainer = document.createElement('div');
-  var imageTitle = document.createElement('div');
-  var imageElement = document.createElement('img');
-  var anchorElement = document.createElement('a');
-  var ownerName = document.createElement('div');
-  /* eslint-enable no-undef */
+  var imageContainer = $('<div></div>').addClass('image');
+  var imageTitle = $('<div></div>');
+  var imageElement = $('<img/>');
+  var anchorElement = $('<a></a>');
+  var ownerName = $('<div></div>');
+  var tags = $('<div class="tags"></div>');
 
   return {
     imageContainer: imageContainer,
     imageTitle: imageTitle,
     imageElement: imageElement,
     anchorElement: anchorElement,
-    ownerName: ownerName
+    ownerName: ownerName,
+    tags: tags
   };
 };
 
 Slickr.createImage = function(photo, imageElement) {
   Slickr.utils.log('createImage', ['photo', photo]);
-  var image = imageElement;
-  image.src = Slickr.makePhotoUrl(photo);
-  image.title = photo.title;
-  image.alt = photo.title;
-  image.height = Slickr.env.imageProperties.height;
-  return image;
-};
-
-Slickr.createImageContainer = function(imageContainer) {
-  Slickr.utils.log('createImageContainer', ['imageContainer', imageContainer]);
-  imageContainer.className += 'image';
-  return imageContainer;
+  imageElement
+    .attr('src', Slickr.makePhotoUrl(photo))
+    .attr('title', photo.title)
+    .attr('alt', photo.title)
+    .attr('height', Slickr.env.imageProperties.height);
+  return imageElement;
 };
 
 Slickr.createImageTitle = function(title, element) {
   Slickr.utils.log('createImageTitle', ['title', title]);
   var imageTitle = element;
-  imageTitle.className += 'image-title';
-  imageTitle.innerText = title;
+  imageTitle.addClass('image-title');
+  imageTitle.text(title);
   return imageTitle;
 };
 
 Slickr.getContainer = function() {
   Slickr.utils.log('getContainer', []);
-  return document.getElementById(Slickr.env.imageProperties.containerId);
+  return $('#' + Slickr.env.imageProperties.containerId);
 };
 
 Slickr.createOwnerName = function(photo, element) {
   Slickr.utils.log('createOwnerName', ['photo', photo, 'element', element]);
-  element.innerText = photo.ownername;
-  element.className += 'owner-name';
+  element.text(photo.ownername);
+  element.addClass('owner-name');
   return element;
 };
 
@@ -63,21 +57,23 @@ Slickr.appendImageToContainer = function(photo) {
   var ownerName = Slickr.createOwnerName(photo, createdElements.ownerName);
   var img = Slickr.createImage(photo, createdElements.imageElement);
   var a = Slickr.createAnchor(photo, createdElements.anchorElement);
-  var imageContainerElement = createdElements.imageContainer;
+  var imageContainer = createdElements.imageContainer;
   var title = photo.title;
   var anchoredImage = Slickr.appendImageToAnchor(img, a);
   var imageTitle = Slickr.createImageTitle(title, createdElements.imageTitle);
-  var imageContainer = Slickr.createImageContainer(imageContainerElement);
-  imageContainer.appendChild(anchoredImage);
-  imageContainer.appendChild(ownerName);
-  imageContainer.appendChild(imageTitle);
-  Slickr.getContainer().appendChild(imageContainer);
+  var tags = createdElements.tags;
+  tags.text(photo.tags);
+  imageContainer.append(anchoredImage);
+  imageContainer.append(ownerName);
+  imageContainer.append(imageTitle);
+  imageContainer.append(tags);
+  Slickr.getContainer().append(imageContainer);
   return imageContainer;
 };
 
 Slickr.createAnchor = function(photo, anchorElement) {
   Slickr.utils.log('createAnchor', ['photo', photo]);
-  anchorElement.href = Slickr.makeLinkUrl(photo);
+  anchorElement.attr('href', Slickr.makeLinkUrl(photo));
   return anchorElement;
 };
 
@@ -89,7 +85,7 @@ Slickr.makePhotoUrl = function(photo) {
 
 Slickr.appendImageToAnchor = function(image, anchor) {
   Slickr.utils.log('appendImageToAnchor', ['image', image, 'anchor', anchor]);
-  anchor.appendChild(image);
+  anchor.append(image);
   return anchor;
 };
 
