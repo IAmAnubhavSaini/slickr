@@ -19,15 +19,21 @@ body {
   content: 'Tags: ';
 }
 
-.tag-cloud::before {
+section.images::before {
+  content: 'Recent images: ';
+}
+
+.tag-cloud::before,
+section.images::before {
   display: block;
   background-color: $yellow;
   color: $black;
-  padding: 1em;
+  padding: .4em;
   font-size: 1.4em;
 }
 
-.titles.tag-cloud .title {
+.titles.tag-cloud .title,
+.tags.tag-cloud .tag {
   background-color: $black;
   color: $yellow;
   padding: .3em;

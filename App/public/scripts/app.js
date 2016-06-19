@@ -110,7 +110,15 @@ Slickr.appendTitles = function(titles) {
     titlesContainer.append(element);
   }
 };
-
+Slickr.appendTags = function(tags) {
+  Slickr.utils.log('appendTags', ['tags', tags]);
+  var tagsContainer = $('section.tags.tag-cloud');
+  for (var i = 0, len = tags.length; i < len; i++) {
+    var element = $('<span class="tag"></span>');
+    element.text(tags[i]);
+    tagsContainer.append(element);
+  }
+};
 Slickr.onResponseFromFlickrApi = function(res) {
   Slickr.utils.log('onResponseFromFlickrApi', ['res', res]);
   var photos = [];
@@ -125,6 +133,7 @@ Slickr.onResponseFromFlickrApi = function(res) {
   }
   Slickr.appendImages(photos);
   Slickr.appendTitles(titles);
+  Slickr.appendTags(tags);
   return photos;
 };
 
