@@ -16,6 +16,9 @@ body {
 #control-panel {
   padding-bottom: 10px;
   margin-bottom: 10px;
+  background-color: #EEE;
+  border-bottom-style: solid;
+  border-radius: 4px;
 
   & #site-title {
     font-size: 32px;
@@ -85,7 +88,7 @@ body {
     & .owner-name::before {
       content: 'by ';
     }
-    & .owner-name {
+    & div:nth-child(even) {
       color: $blue;
       background-color: $white;
       border-radius: .4em;
