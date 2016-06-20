@@ -163,22 +163,44 @@ Slickr.tags = {
   }
 };
 
+Slickr.initialize = function(imageData) {
+  Slickr.titles.appendTitles(imageData.titles);
+  Slickr.tags.appendTags(imageData.tags);
+  Slickr.appendImages(imageData.photos);
+};
+
 Slickr.onResponseFromFlickrApi = function(res) {
   Slickr.utils.log('onResponseFromFlickrApi', ['res', res]);
+  var imageData;
+  var images = [];
   var photos = [];
   var titles = [];
   var tags = [];
   var photo;
+  var title;
+  var tag;
   for (var i = 0, len = res.photos.photo.length; i < len; i++) {
     photo = res.photos.photo[i];
     photos.push(photo);
-    titles.push(photo.title.toLowerCase());
-    tags.push(photo.tags.toLowerCase());
+    title = photo.title.toLowerCase();
+    titles.push(title);
+    tag = photo.tags.toLowerCase();
+    tags.push(tag);
+    images.push({
+      photo: photo,
+      title: title,
+      tag: tag,
+      ownerName: photo.ownername
+    });
   }
-  Slickr.titles.appendTitles(titles);
-  Slickr.tags.appendTags(tags);
-  Slickr.appendImages(photos);
-  return photos;
+  imageData = {
+    titles: titles,
+    tags: tags,
+    photos: photos,
+    images: images
+  };
+  Slickr.initialize(imageData);
+  return imageData;
 };
 
 /* eslint-disable no-unused-vars */
@@ -239,5 +261,8 @@ $(function() {
   });
   $('#tagsToggleBtn').on('click', function() {
     $('.tags.tag-cloud').toggleClass('display');
+  });
+  $('.tag-cloud').on('click', function(event) {
+    console.log('clicked:', event.target, $(event.target).text());
   });
 });
