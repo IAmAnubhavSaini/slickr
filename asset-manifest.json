@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/slickr/static/css/main.1336ecdf.chunk.css",
+    "main.js": "/slickr/static/js/main.bed76e4e.chunk.js",
+    "main.js.map": "/slickr/static/js/main.bed76e4e.chunk.js.map",
+    "runtime-main.js": "/slickr/static/js/runtime-main.ec559429.js",
+    "runtime-main.js.map": "/slickr/static/js/runtime-main.ec559429.js.map",
+    "static/css/2.c490997a.chunk.css": "/slickr/static/css/2.c490997a.chunk.css",
+    "static/js/2.734461e3.chunk.js": "/slickr/static/js/2.734461e3.chunk.js",
+    "static/js/2.734461e3.chunk.js.map": "/slickr/static/js/2.734461e3.chunk.js.map",
+    "static/js/3.e7b7ed02.chunk.js": "/slickr/static/js/3.e7b7ed02.chunk.js",
+    "static/js/3.e7b7ed02.chunk.js.map": "/slickr/static/js/3.e7b7ed02.chunk.js.map",
+    "index.html": "/slickr/index.html",
+    "static/css/2.c490997a.chunk.css.map": "/slickr/static/css/2.c490997a.chunk.css.map",
+    "static/css/main.1336ecdf.chunk.css.map": "/slickr/static/css/main.1336ecdf.chunk.css.map",
+    "static/js/2.734461e3.chunk.js.LICENSE.txt": "/slickr/static/js/2.734461e3.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ec559429.js",
+    "static/css/2.c490997a.chunk.css",
+    "static/js/2.734461e3.chunk.js",
+    "static/css/main.1336ecdf.chunk.css",
+    "static/js/main.bed76e4e.chunk.js"
+  ]
+}
