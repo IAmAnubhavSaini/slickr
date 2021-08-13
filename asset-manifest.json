@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/slickr/static/css/main.c3891bd8.chunk.css",
-    "main.js": "/slickr/static/js/main.45473d9d.chunk.js",
-    "main.js.map": "/slickr/static/js/main.45473d9d.chunk.js.map",
+    "main.js": "/slickr/static/js/main.c775490b.chunk.js",
+    "main.js.map": "/slickr/static/js/main.c775490b.chunk.js.map",
     "runtime-main.js": "/slickr/static/js/runtime-main.ec559429.js",
     "runtime-main.js.map": "/slickr/static/js/runtime-main.ec559429.js.map",
     "static/css/2.c490997a.chunk.css": "/slickr/static/css/2.c490997a.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.c490997a.chunk.css",
     "static/js/2.734461e3.chunk.js",
     "static/css/main.c3891bd8.chunk.css",
-    "static/js/main.45473d9d.chunk.js"
+    "static/js/main.c775490b.chunk.js"
   ]
 }
